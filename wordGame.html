@@ -1,0 +1,103 @@
+<!--
+!-Adegboye Josiah Adeola
+!-192102
+!- CSC 292 Assignment
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aiit</title>
+		<style type="text/css">
+			body{
+				font-family: Arvo;
+				background-color: purple;
+			}
+			table{
+				border: 1px solid pink;
+				border-collapse: collapse;
+			}
+			tr,th{
+				border: 1px solid pink;
+				color: grey;
+				border-collapse: collapse;
+				padding:10px 30px 10px 30px;
+			}
+			.correct{
+				background-color: grey;
+				color: darkslategrey;
+			}
+			.wrong{
+				background-color: darkslategrey;
+			}
+			.wrongB{
+				background-color: #EAEAE2;
+			}
+			#info{
+				top: 0px;
+				margin: 30px;
+			}
+		</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var attempts = 0;
+		var valid = 0;
+		document.write("<table align=\"center\">");
+		document.write("<caption>Try if you can</caption>")
+		var nArr = new Array("AISHA", "AARON", "BRAIN", "TOYIN", "ALANI");
+		var quiz = 0
+		var cNt = 0;
+		for (var i = 0; i < nArr.length; i++){
+			document.write("<tr >");
+			for (var j = 0; j < nArr.length; j++) {
+				document.write("<th>");
+				if ((i+j)%2 == 0) {
+					document.write("<button onclick=\"clicked("+i+","+j+","+cNt+","+quiz+")\" value=\"?\">?</button>");
+					++quiz;
+				} else {
+					document.write("<h2>");
+					document.write(nArr[i][j]);
+					document.write("</h2>");
+				}
+				document.write("</th>");
+				cNt++;
+			}
+			document.write("</tr >");
+		}
+		document.write("</table >");
+		function clicked(i,j,tileNo,quiz) {//very little docing I'm sorry,
+			attempts++;
+			var tile = new Number(tileNo);
+			var quiz = new Number(quiz);
+			var i = new Number(i);
+			var j = new Number(j);
+			var soln = (nArr[i][j]);
+			var ans = prompt("What is the missing letter");
+			if (ans == soln || ans.toUpperCase() == soln) {
+				valid++;
+				var tray = document.getElementsByTagName('button');
+				var me = tray[quiz];
+				me.setAttribute("hidden", "true");
+				tray = document.getElementsByTagName('th');
+				me = tray[tileNo];
+				var h = document.createElement("h2");
+				h.innerHTML = soln;
+				me.appendChild(h);
+				me.setAttribute("class", "correct");
+			}
+			else{
+				alert("Wrong");
+				var tray = document.getElementsByTagName('button');
+				var me = tray[quiz];
+				me.setAttribute("class", "wrongB");
+				tray = document.getElementsByTagName('th');
+				me = tray[tileNo];
+				me.setAttribute("class", "wrong");
+			}
+		}
+	</script>
+</body>
+	<div align="right" id="info">
+		<h2 >Attempts</h2>
+	</div>
+</html>
